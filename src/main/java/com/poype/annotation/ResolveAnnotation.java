@@ -45,10 +45,27 @@ public class ResolveAnnotation {
                  */
             }
         }
+    }
 
+    public static void resolveContainerAnnotation(Class<UserService> cl) {
+        for (Method m : cl.getDeclaredMethods()) {
+            ContainerAnnotation ca = m.getAnnotation(ContainerAnnotation.class);
+            UseCase[] useCaseList = ca.value();
+
+            for (UseCase uc : useCaseList) {
+                System.out.println(uc);
+
+                /*
+                    打印结果：
+                    @com.poype.annotation.UseCase(description="one", id=1)
+                    @com.poype.annotation.UseCase(description="two", id=2)
+                    @com.poype.annotation.UseCase(description="no description", id=3)
+                 */
+            }
+        }
     }
 
     public static void main(String[] args) {
-        resolveUseCases(PasswordUtils.class);
+        resolveContainerAnnotation(UserService.class);
     }
 }
