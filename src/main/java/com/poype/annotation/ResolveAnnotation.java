@@ -1,5 +1,12 @@
 package com.poype.annotation;
 
+import com.poype.App;
+import com.poype.controller.HelloController;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
@@ -65,7 +72,43 @@ public class ResolveAnnotation {
         }
     }
 
+    // 解析注解头顶上的注解
+    private static void resolveCombinationAnnotation() {
+        Class<App> cl1 = App.class;
+        SpringBootApplication sba = cl1.getAnnotation(SpringBootApplication.class);
+        // App上声明了 SpringBootApplication 注解
+        System.out.println(sba);
+
+        // 通过 sba.getClass() 获取到的不是 SpringBootApplication.class，所以下面只能显示使用SpringBootApplication.class
+        Class<SpringBootApplication> cl2 = SpringBootApplication.class;
+        // 在SpringBootApplication注解上又声明了其它注解，其中包括ComponentScan注解
+        ComponentScan cs = cl2.getAnnotation(ComponentScan.class);
+        System.out.println(cs);
+
+        // 注解与其它普通的类一样，注解的头顶上也可以声明其它注解。也可以通过反射机制对注解头顶上的注解进行解析。
+    }
+
+    private static void resolveCombinationAnnotation2() {
+        Class<HelloController> cl1 = HelloController.class;
+        RestController rc = cl1.getAnnotation(RestController.class);
+        System.out.println(rc);
+
+        Class<RestController> cl2 = RestController.class;
+        for (Annotation annotation : cl2.getAnnotations()) {
+            System.out.println(annotation);
+
+            /*
+                RestController是 Controller 与 ResponseBody两个注解的组合
+                打印结果：
+                @org.springframework.stereotype.Controller("")
+                @org.springframework.web.bind.annotation.ResponseBody()
+             */
+        }
+    }
+
     public static void main(String[] args) {
-        resolveContainerAnnotation(UserService.class);
+        resolveCombinationAnnotation();
+        System.out.println("-----------------------------------------------------");
+        resolveCombinationAnnotation2();
     }
 }
