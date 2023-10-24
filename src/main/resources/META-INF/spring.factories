@@ -3,3 +3,6 @@ com.poype.initializer.TestApplicationContextInitializer
 
 org.springframework.context.ApplicationListener=\
 com.poype.listener.TestApplicationListener
+
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.test.auto_configuration.SampleAutoConfiguration
