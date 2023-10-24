@@ -1,0 +1,5 @@
+org.springframework.context.ApplicationContextInitializer=\
+com.poype.initializer.TestApplicationContextInitializer
+
+org.springframework.context.ApplicationListener=\
+com.poype.listener.TestApplicationListener

@@ -1,0 +1,18 @@
+一、 构造一个SpringApplication对象的过程
+    0. run方法传进来的类赋值给primarySources
+    1. 推测应用的类型(根据classpath下的类推测是否为WEB应用类型)
+    2. 从spring.factories文件中获取ApplicationContextInitializer的实现类对象，赋值给initializers属性
+    3. 从spring.factories文件中获取ApplicationListener的实现类对象，赋值给listeners属性
+    4. 找到main方法所在的类
+
+二、执行SpringApplication对象的run方法
+    0. 从spring.factories文件中加载所有的SpringApplicationRunListener实现类对象。默认只有一个实现类，就是EventPublishingRunListener
+    1. EventPublishingRunListener的作用就是在SpringApplication启动的各个阶段发送Event给各个ApplicationListener的实现对象进行处理
+    2. EventPublishingRunListener发送第一个消息——starting，该消息将由LoggingApplicationListener处理。
+    3. prepareEnvironment
+
+Enumeration<URL> urls = classLoader.getResources("META-INF/spring.factories");
+这行代码会把每个Jar文件中的 META-INF/spring.factories 文件全部加载出来。
+无论是哪一个Jar文件，在它的META-INF/spring.factories文件中为各个Listener或Initializer接口定义的实现类都可以在SpringBoot启动过程中被加载到。
+
+每个ApplicationListener实现类都会实现一个supportsEventType方法，表示自己要处理的Event类型。
