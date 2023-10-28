@@ -19,7 +19,9 @@ public class TestContextAwareController implements ApplicationContextAware {
     @GetMapping("/test_context_aware")
     public String test() {
         // 从IOC容器中获取HelloController Bean
-        HelloController helloController = this.applicationContext.getBean(HelloController.class);
+        HelloController helloController = (HelloController)this.applicationContext.getBean("helloController");
+        System.out.println(helloController); // HelloController Bean的ID就是 helloController
+
         return helloController.hello();
     }
 }

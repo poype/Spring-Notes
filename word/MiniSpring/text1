@@ -20,3 +20,8 @@ IOC和DI这两个特性结合起来所带来的好处就是使对象和对象之
 Primary属性 和 @Primary注解
 有两个相同类型的Bean，如果不做任何处理，这会给byType注入带来歧义。primary="true"表示首选这个bean作为候选人。这就解决了歧义，程序就正常运行。
 <bean class="com.poype.study_spring_doc.annotation.Cat" primary="true"></bean>
+
+@Component、@Controller、@Service、@Repository这个四个注解的value属性指定的是注册Bean的ID，相当于xml中bean标签的id属性。
+如果没有明确指定value属性的值，通过@Component、@Controller、@Service、@Repository等注册到容器中的Bean都有一个默认的名字，这个就是注册bean的类名(首字母从大写变成小写)
+所以HelloController类型Bean的Id是helloController，注意首字母变成了小写
+
