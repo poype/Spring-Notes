@@ -22,4 +22,10 @@ public class HelloController {
         sampleService.test();
         return "hello";
     }
+
+    @GetMapping("/test_aop")
+    public String targetMethod() {
+        System.out.println("test aop");
+        return "test_aop";
+    }
 }
