@@ -10,3 +10,8 @@ IOC和DI这两个特性结合起来所带来的好处就是使对象和对象之
 业务程序中不需要再手动 new 一个业务类，只要把它交由框架容器去管理就可以获取我们所需的对象。
 
 
+@Autowired 和 @Resource
+1. 来源不同：@Autowired是Spring定义的注解，而@Resource是Java定义的注解，它来自于JSR-250
+2. 依赖查找顺序不同：
+     a. @Autowired会先根据类型（byType）查找bean，如果存在多个相同类型的Bean再根据名称（byName）进行查找。
+     b. @Resource是先根据Bean的名称查找，如果根据名称查找不到，再根据Bean的类型进行查找。
