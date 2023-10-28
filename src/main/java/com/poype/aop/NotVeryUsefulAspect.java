@@ -32,8 +32,8 @@ public class NotVeryUsefulAspect {
     }
 
     // @AfterReturning表示在连接点被执行完返回之后执行testAfterReturn方法
-    @AfterReturning("testPointCut1()")  // 在本例中，由于Pointcut和Advice是在同一个类中声明的，所以Advice关联切点不用必须写全包名和类名，只提供方法名即可
-    public void testAfterReturn() {
-        System.out.println("testAfter");
+    @AfterReturning(pointcut = "testPointCut1()", returning = "result")  // 在本例中，由于Pointcut和Advice是在同一个类中声明的，所以Advice关联切点不用必须写全包名和类名，只提供方法名即可
+    public void testAfterReturn(String result) {
+        System.out.println("testAfter, the result is " + result);
     }
 }
