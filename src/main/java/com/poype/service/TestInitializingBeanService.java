@@ -1,8 +1,9 @@
 package com.poype.service;
 
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
-public class TestInitializingBeanService implements InitializingBean {
+public class TestInitializingBeanService implements InitializingBean, DisposableBean {
 
     private String name;
 
@@ -41,5 +42,14 @@ public class TestInitializingBeanService implements InitializingBean {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    /*
+     * DisposableBean接口提供方法public void destroy()
+     * 当容器被close时，destroy方法会被调用
+     */
+    @Override
+    public void destroy() throws Exception {
+        System.out.println("ApplicationContext has bean closed");
     }
 }
