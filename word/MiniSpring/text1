@@ -15,3 +15,8 @@ IOC和DI这两个特性结合起来所带来的好处就是使对象和对象之
 2. 依赖查找顺序不同：
      a. @Autowired会先根据类型（byType）查找bean，如果存在多个相同类型的Bean再根据名称（byName）进行查找。
      b. @Resource是先根据Bean的名称查找，如果根据名称查找不到，再根据Bean的类型进行查找。
+
+
+Primary属性 和 @Primary注解
+有两个相同类型的Bean，如果不做任何处理，这会给byType注入带来歧义。primary="true"表示首选这个bean作为候选人。这就解决了歧义，程序就正常运行。
+<bean class="com.poype.study_spring_doc.annotation.Cat" primary="true"></bean>
