@@ -38,4 +38,8 @@ public class NewPointcut {
 	 any join point (method execution only in Spring AOP) within the service package or a sub-package:
 	 		within(com.xyz.service..*)
 	 */
+
+    // 拦截TestAopController下素有以test开头的方法
+    @Pointcut("execution(* com.poype.controller.TestAopController.test*())")
+    public void testAfterThrowingPointcut(){}
 }
