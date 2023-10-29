@@ -42,4 +42,8 @@ public class NewPointcut {
     // 拦截TestAopController下素有以test开头的方法
     @Pointcut("execution(* com.poype.controller.TestAopController.test*())")
     public void testAfterThrowingPointcut(){}
+
+    // 拦截TestAopController下素有以test开头并且包含参数的方法
+    @Pointcut("execution(* com.poype.controller.TestAopController.test*(..))")
+    public void testAroundPointcut(){}
 }
