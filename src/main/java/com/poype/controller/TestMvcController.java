@@ -68,4 +68,10 @@ public class TestMvcController {
     }
     // 方法的参数也可以不用@ModelAttribute注解指定key的名字，如果没有用@ModelAttribute指定key的名字，那么它会自动使用类名首字母小写作为key，
     // 在本例中默认的key是testRequest
+
+    @GetMapping("test_exception")
+    public String testException(@RequestParam("number") int number) {
+        System.out.println(10 / number);
+        return "Success";
+    }
 }
